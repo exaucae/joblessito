@@ -1,7 +1,7 @@
 ext {
     mapstructVersion = '1.4.1.Final'
     jeasyVersion = '4.2.0'
-    swagger2Version = '2.9.2'
+    openapiUiVersion = '1.5.4'
 }
 
 dependencies {
@@ -9,8 +9,7 @@ dependencies {
     implementation project(':application')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "io.springfox:springfox-swagger2:$swagger2Version"
-    implementation "io.springfox:springfox-swagger-ui:$swagger2Version"
+    implementation "org.springdoc:springdoc-openapi-ui:$openapiUiVersion"
     implementation 'com.sipios:spring-search:0.2.0'
 
 

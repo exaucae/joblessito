@@ -4,9 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -18,6 +16,8 @@ import javax.validation.constraints.Positive;
 @EqualsAndHashCode
 public class JobSeekerEntity {
     @Id
+    @SequenceGenerator(initialValue = 20202, allocationSize = 100, name = "jobseekerSeqGenerator", sequenceName = "jobSeekerSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jobSeekerSeq")
     Long id;
     @Positive
     Integer age;

@@ -11,7 +11,4 @@ import org.springframework.data.jpa.domain.Specification;
 public interface IJobSeekerPersistenceMapper extends IGenericMapper<JobSeeker, JobSeekerEntity> {
 
     JobSeekerEntity saveJobSeekerCommandToEntity(SaveJobSeekerCommand command);
-
-    Specification<JobSeekerEntity> toEntitySpecs(Specification<JobSeeker> specs);
-
 }

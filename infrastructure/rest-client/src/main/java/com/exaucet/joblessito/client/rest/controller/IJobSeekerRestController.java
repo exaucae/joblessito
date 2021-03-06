@@ -20,7 +20,7 @@ public interface IJobSeekerRestController {
     @MethodLogger
     List<JobSeeker> getAll();
 
-    @PostMapping
+    @PostMapping("/seekers")
     @MethodLogger
     JobSeeker create(@RequestBody final JobSeeker dto);
 

@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     ports:
-      - "1444:1433"
+      - "1436:1433"
   joblessito_server:
     restart: always
     build: .

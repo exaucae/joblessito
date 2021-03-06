@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unchecked")
 @PersistenceAdapter
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-class SearchJobseekerPersistenceAdapter extends AbstractGetAllJpaAdapter implements ISearchJobSeekerPort {
+class SearchJobSeekerPersistenceAdapter extends AbstractGetAllJpaAdapter implements ISearchJobSeekerPort {
 
     private final IJobSeekerRepository repository;
 
@@ -37,13 +37,11 @@ class SearchJobseekerPersistenceAdapter extends AbstractGetAllJpaAdapter impleme
 
     @Override
     public Optional<Set<JobSeeker>> handle(Specification<JobSeeker> specs) {
-        var res = repository.findAll(Specification.where(mapper.toEntitySpecs(specs)));
+      //  var res = repository.findAll(Specification.where(mapper.toEntitySpecs(specs)));
 
-        var res2 = res.stream().map(
-                seeker -> mapper.entityToModel(seeker)
-        ).collect(Collectors.toSet());
+      //  var res2 = res.stream().map( mapper::entityToModel).collect(Collectors.toSet());
 
-        return Optional.of(res2);
+        return Optional.empty();
 
     }
 }
