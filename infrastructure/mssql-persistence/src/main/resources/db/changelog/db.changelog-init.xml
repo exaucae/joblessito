@@ -3,7 +3,7 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet author="Sega Diop" id="init-1">
+    <changeSet author="chrys-exaucet" id="init-1">
         <createTable tableName="jobSeeker">
             <column name="CODE" type="VARCHAR(16)">
                 <constraints nullable="false" primaryKey="true" unique="true"/>

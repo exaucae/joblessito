@@ -11,6 +11,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "io.springfox:springfox-swagger2:$swagger2Version"
     implementation "io.springfox:springfox-swagger-ui:$swagger2Version"
+    implementation 'com.sipios:spring-search:0.2.0'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

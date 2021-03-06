@@ -1,0 +1,19 @@
+version: '3.9'
+volumes:
+  joblessito_db_data: { }
+
+services:
+  joblessito_db:
+    container_name: joblessito_db
+    image: mcr.microsoft.com/mssql/server:2019-CU9-ubuntu-16.04
+    env_file:
+      - .env
+    ports:
+      - "1444:1433"
+  joblessito_server:
+    restart: always
+    build: .
+    ports:
+      - 8081:8081
+    depends_on:
+      -  joblessito_db

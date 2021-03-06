@@ -1,6 +1,6 @@
 FROM openjdk:11-stretch
 
-ARG DEPENDENCY=bootloader/build
+ARG DEPENDENCY=boot/build
 ENV JAVA_OPTS="-Xmx256m -Xms128m"
 
 RUN mkdir -p /opt/application/properties

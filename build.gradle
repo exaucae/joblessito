@@ -13,6 +13,7 @@ ext {
     containerImage = "$containerRegistry/exaucetsiege/joblessito/$rootProject.name"
 }
 
+
 allprojects {
     group 'com.exaucet.joblessito'
     version '1.0-SNAPSHOT'
@@ -82,7 +83,7 @@ subprojects {
 docker {
     name = "$containerImage:${version.toString().toLowerCase()}"
     tag "version", "${version.toString().toLowerCase()}"
-    copySpec.from('bootloader/build').into('bootloader/build')
+    copySpec.from('boot/build').into('boot/build')
 }
 
 dockerRun {

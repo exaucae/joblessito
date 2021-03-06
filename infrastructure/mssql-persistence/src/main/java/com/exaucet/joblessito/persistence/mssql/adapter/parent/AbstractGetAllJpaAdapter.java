@@ -7,10 +7,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static java.util.Spliterators.spliteratorUnknownSize;
+import static java.util.stream.StreamSupport.stream;
 
+@SuppressWarnings("ALL")
 public abstract class AbstractGetAllJpaAdapter extends AbstractJpaAdapter<CrudRepository> {
 
     @Transactional(readOnly = true)
@@ -18,8 +19,7 @@ public abstract class AbstractGetAllJpaAdapter extends AbstractJpaAdapter<CrudRe
 
         Iterable entities = getRepository().findAll();
 
-        Set<T> result = (Set<T>) StreamSupport
-                .stream(spliteratorUnknownSize(entities.iterator(), Spliterator.ORDERED), true)
+        Set<T> result = (Set<T>) stream(spliteratorUnknownSize(entities.iterator(), Spliterator.ORDERED), true)
                 .map(getMapper()::entityToModel)
                 .collect(Collectors.toSet());
 

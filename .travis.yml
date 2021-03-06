@@ -22,11 +22,3 @@ jobs:
       script:
         - ./gradlew check
         -  bash <(curl -s https://codecov.io/bash)
-    - stage: deploy
-      if: branch IN (master, dev)
-      script:
-        - ./gradlew publish
-        - bash ./scripts/docker_deploy.sh
-
-notifications:
-  slack: exaucetsiege:Tjeo1DuAEFQcwCovonR965F6

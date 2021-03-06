@@ -6,6 +6,8 @@ dependencies {
 	implementation project(':common')
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'com.sipios:spring-search:0.2.0'
+
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
