@@ -2,8 +2,6 @@ package com.exaucet.joblessito.client.rest.controller;
 
 import com.exaucet.joblessito.application.jobSeeker.model.JobSeeker;
 import com.exaucet.joblessito.common.annotation.MethodLogger;
-import com.sipios.springsearch.anotation.SearchSpec;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +23,6 @@ public interface IJobSeekerRestController {
     JobSeeker create(@RequestBody final JobSeeker dto);
 
 
-    @GetMapping("/seekers/search")
-    Set<JobSeeker> getSeekersBy(@SearchSpec Specification<JobSeeker> specs);
+    @GetMapping("/seekers/search/{query}")
+    Set<JobSeeker> getSeekersBy(@PathVariable(required = false, name = "query") String query);
 }

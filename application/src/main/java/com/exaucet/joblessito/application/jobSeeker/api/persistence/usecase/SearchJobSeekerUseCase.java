@@ -6,7 +6,6 @@ import com.exaucet.joblessito.application.jobSeeker.spi.persistence.ISearchJobSe
 import com.exaucet.joblessito.common.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Optional;
 import java.util.Set;
@@ -18,8 +17,8 @@ public class SearchJobSeekerUseCase implements ISearchJobSeekerService {
     private final ISearchJobSeekerPort port;
 
     @Override
-    public Optional<Set<JobSeeker>> handle(Specification<JobSeeker> specs) {
-        return port.handle(specs);
+    public Optional<Set<JobSeeker>> handle(String query) {
+        return port.handle(query);
     }
 
 }

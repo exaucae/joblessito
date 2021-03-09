@@ -6,17 +6,13 @@ import com.exaucet.joblessito.application.jobSeeker.api.persistence.ISearchJobSe
 import com.exaucet.joblessito.application.jobSeeker.model.JobSeeker;
 import com.exaucet.joblessito.client.rest.controller.IJobSeekerRestController;
 import com.exaucet.joblessito.common.annotation.WebAdapter;
-import com.sipios.springsearch.anotation.SearchSpec;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @WebAdapter
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -39,7 +35,7 @@ public class JobSeekerWebAdapter implements IJobSeekerRestController {
     }
 
     @Override
-    public Set<JobSeeker> getSeekersBy(@SearchSpec Specification<JobSeeker> specs) {
+    public Set<JobSeeker> getSeekersBy(String specs) {
         return searchJobSeekerService.handle(specs).orElse(null);
     }
 }

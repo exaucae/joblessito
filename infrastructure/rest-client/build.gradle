@@ -10,8 +10,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springdoc:springdoc-openapi-ui:$openapiUiVersion"
-    implementation 'com.sipios:spring-search:0.2.0'
-
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

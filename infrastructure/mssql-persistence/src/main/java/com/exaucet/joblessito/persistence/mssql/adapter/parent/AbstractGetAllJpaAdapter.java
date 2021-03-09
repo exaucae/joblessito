@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import static java.util.Spliterators.spliteratorUnknownSize;
 import static java.util.stream.StreamSupport.stream;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unchecked, rawTypes")
 public abstract class AbstractGetAllJpaAdapter extends AbstractJpaAdapter<CrudRepository> {
 
     @Transactional(readOnly = true)

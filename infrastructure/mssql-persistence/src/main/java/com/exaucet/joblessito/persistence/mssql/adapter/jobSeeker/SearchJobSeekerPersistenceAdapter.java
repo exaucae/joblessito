@@ -4,21 +4,19 @@ import com.exaucet.joblessito.application.jobSeeker.model.JobSeeker;
 import com.exaucet.joblessito.application.jobSeeker.spi.persistence.ISearchJobSeekerPort;
 import com.exaucet.joblessito.common.annotation.PersistenceAdapter;
 import com.exaucet.joblessito.persistence.mssql.adapter.jobSeeker.mapper.IJobSeekerPersistenceMapper;
-import com.exaucet.joblessito.persistence.mssql.adapter.parent.AbstractGetAllJpaAdapter;
+import com.exaucet.joblessito.persistence.mssql.adapter.parent.AbstractSearchJpaAdapter;
 import com.exaucet.joblessito.persistence.mssql.repository.IJobSeekerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 @PersistenceAdapter
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-class SearchJobSeekerPersistenceAdapter extends AbstractGetAllJpaAdapter implements ISearchJobSeekerPort {
+class SearchJobSeekerPersistenceAdapter extends AbstractSearchJpaAdapter implements ISearchJobSeekerPort {
 
     private final IJobSeekerRepository repository;
 
@@ -35,13 +33,9 @@ class SearchJobSeekerPersistenceAdapter extends AbstractGetAllJpaAdapter impleme
         return mapper;
     }
 
+
     @Override
-    public Optional<Set<JobSeeker>> handle(Specification<JobSeeker> specs) {
-      //  var res = repository.findAll(Specification.where(mapper.toEntitySpecs(specs)));
-
-      //  var res2 = res.stream().map( mapper::entityToModel).collect(Collectors.toSet());
-
-        return Optional.empty();
-
+    public Optional<Set<JobSeeker>> handle(String query) {
+        return search(query);
     }
 }
