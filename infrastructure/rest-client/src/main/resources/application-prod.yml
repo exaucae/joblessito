@@ -1,0 +1,25 @@
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: bb664690b0002ce35dbb
+            client-secret: d1724f2da346b6f52dec5c7506d4db52653fa8ee
+          okta:
+            client-id: 0oat69bsbNKIxoPDX5d6
+            client-secret: OFo3olLNl3qbYb8UmVt33-5aLwTAIl-3DixQ5bAD
+            client-name: Joblessito
+            scope: openid, email, profile
+        provider:
+          okta:
+            issuer-uri: https://dev-60497803.okta.com/oauth2/default
+  profiles:
+    active: prod
+
+# TODO: add okta and test the whole app : https://developer.okta.com/blog/2019/05/15/spring-boot-login-options
+# https://developer.okta.com/blog/2018/07/19/simple-crud-react-and-spring-boot

@@ -1,0 +1,27 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+      - name: clean gradle  cache
+        run: |
+          rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+          rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      - name: build
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assemble
+      - name: test
+        run: |
+          ./gradlew check
+          bash <(curl -s https://codecov.io/bash)

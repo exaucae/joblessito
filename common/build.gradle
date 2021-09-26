@@ -1,0 +1,12 @@
+ext {
+	springAopVersion = '2.3.5.RELEASE'
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-aop:$springAopVersion"
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}

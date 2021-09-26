@@ -1,0 +1,117 @@
+plugins {
+    id 'java-library'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'jacoco'
+    id 'maven-publish'
+    id 'com.palantir.docker' version '0.25.0'
+    id 'com.palantir.docker-run' version '0.25.0'
+}
+
+ext {
+    springBootVersion = "2.3.5.RELEASE"
+    containerRegistry = "registry.gitlab.com"
+    containerImage = "$containerRegistry/exaucet/joblessito/$rootProject.name"
+}
+
+
+allprojects {
+    group 'com.exaucet.joblessito'
+    version '1.0-SNAPSHOT'
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+    apply plugin: 'jacoco'
+    apply plugin: 'maven-publish'
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+        }
+    }
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_1_10
+        targetCompatibility = JavaVersion.VERSION_1_10
+    }
+
+    test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+        systemProperty 'de.adesso.junitinsights.enabled', 'true'
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            xml.enabled false
+            csv.enabled false
+            html.destination file("${buildDir}/reports/jacoco")
+        }
+    }
+
+    publishing {
+        publications {
+            "$project.name"(MavenPublication) {
+                from components.java
+            }
+        }
+        repositories {
+            maven {
+                url "https://gitlab.com/api/v4/projects/22241402/packages/maven"
+                name "joblessito"
+                credentials(HttpHeaderCredentials) {
+                    name = 'Deploy-Token'
+                    value = System.getenv("DeployToken")
+                }
+                authentication {
+                    header(HttpHeaderAuthentication)
+                }
+            }
+        }
+    }
+
+}
+
+docker {
+    name = "$containerImage:${version.toString().toLowerCase()}"
+    tag "version", "${version.toString().toLowerCase()}"
+    copySpec.from('boot/build').into('boot/build')
+}
+
+dockerRun {
+    name = "$rootProject.name"
+    image = "$containerImage"
+    ports "8080:8080"
+}
+
+task codeCoverageReport(type: JacocoReport) {
+
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/jacoco.xml")
+        html.enabled true
+        html.destination file("${buildDir}/reports/jacoco")
+        csv.enabled false
+    }
+}
+
+codeCoverageReport.dependsOn {
+    subprojects*.test
+}
+
+test {
+    finalizedBy codeCoverageReport
+}

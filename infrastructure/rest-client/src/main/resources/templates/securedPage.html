@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang=en xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Secured Page</title>
+</head>
+<body>
+<h1>Secured Page</h1>
+<div>User Name: <!--/*@thymesVar id="userName" type="text"*/-->
+    <span th:text="${userName}"></span></div>
+<div>Client Name: <!--/*@thymesVar id="clientName" type="text"*/-->
+    <span th:text="${clientName}"></span></div>
+<div>User Attributes: <!--/*@thymesVar id="userAttributes" type="text"*/-->
+    <span th:text="${userAttributes}"></span></div>
+</body>
+</html>
+

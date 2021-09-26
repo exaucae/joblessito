@@ -1,0 +1,8 @@
+rootProject.name = 'joblessito'
+
+include 'common'
+include 'application'
+include 'infrastructure:mssql-persistence'
+include 'infrastructure:rest-client'
+include 'boot'
+
